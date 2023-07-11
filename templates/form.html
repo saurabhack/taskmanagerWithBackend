@@ -1,0 +1,22 @@
+<form method="post" action="/">
+    {% csrf_token %}
+    <h1>task details</h1>
+    <br>
+    <input type="text"  name="task">
+    <br>
+    <h1>enter your date</h1>
+    <input type="text" name="date">
+    <br>
+    <h1>enter time to finish</h1>
+    <br>
+    <h1>starting time</h1>
+    <br>
+    <input type="time" name="starting">
+    <br>
+    <h1>finishing time</h1>
+    <br>
+    <input type="time" name="finishing">
+    <br>
+    <br>
+    <button>add+</button>
+</form>
