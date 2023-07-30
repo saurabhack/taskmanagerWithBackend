@@ -2,96 +2,208 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <meta charset="utf-8">
+  <title>Task manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--style-->
+  <style>
+    body {
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
 
-<meta charset="utf-8">
-<title>Task manager</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--style-->
-<style>
-.card {
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
+      background-color: #fff;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      padding: 20px;
+      overflow: hidden;
+    }
 
-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5),
-			0 6px 20px 0 rgba(0,0,0,0.39);
-background: lightblue;
-margin-bottom : 5%;
-border-radius: 25px;
-padding : 2%;
-overflow: auto;
-resize: both;
-text-overflow: ellipsis;
+    .card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .card b {
+      font-size: 24px;
+      color: #333;
+    }
+
+    .card hr {
+      border-color: #ddd;
+    }
+
+    .card p {
+      font-size: 16px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    .card i {
+      font-style: italic;
+      color: #888;
+    }
+
+    .card button {
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 8px 15px;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .card button:hover {
+      background-color: #e53935;
+    }
+
+    .submit_form {
+      text-align: center;
+      padding: 3%;
+      background: #f0f0f0;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-weight: 600;
+      color: #333;
+      margin-top: 30px;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid #ddd;
+    }
+	.search-bar {
+      margin-bottom: 20px;
+    }
+
+    .search-bar input[type="text"] {
+      border-radius: 5px;
+      padding: 10px;
+      width: 200%;
+    }
+
+    .search-bar button {
+      border-radius: 5px;
+      padding: 6px 25px;
+	  position: absolute;
+	  right:280px;
+    }
+	/* Customize the button's appearance */
+#completeButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
-.card:hover{
-	background: lightblue;
+
+/* Style the button on hover */
+#completeButton:hover {
+  background-color: #45a049;
 }
 
-.submit_form{
-
-	text-align: center;
-	padding: 3%;
-	background: pink;
-
-background: rgb(202, 238, 202);
-	border-radius: 25px;
-	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.4),
-				0 6px 20px 0 rgba(0,0,0,0.36);
+/* Style the button when it's active or being clicked */
+#completeButton:active {
+  background-color: #3e8e41;
 }
-</style>
 
+/* Disable the button when it's in a disabled state */
+#completeButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+  </style>
+  <script>
+	// Get the button element by its ID
+const completeButton = document.getElementById('completeButton');
+
+// Add a click event listener to the button
+completeButton.addEventListener('click', () => {
+  // Replace the following line with the desired action when the button is clicked
+  alert('Button clicked!');
+});
+
+// Disable the button after clicking it once (optional)
+completeButton.addEventListener('click', () => {
+  completeButton.disabled = true;
+});
+
+  </script>
 </head>
 
 <body class="container-fluid">
-{% if messages %}
-{%  for message in messages %}
-<div class="alert alert-info">
-	<strong>{{message}}</strong>
-</div>
-{% endfor %}
-{% endif %}
-<center class="row">
-	<h1><i>Task Manager</i></h1>
-	<hr />
-</center>
-
-<div class="row">
-
-	<div class="col-md-8">
-        {% for i in list %}
-	<div class="card">
-		<center><b>{{title}}</b></center>
-		<hr/>
-		{{i.date}}
-		<hr/>
-		{{i.details}}
-		<hr/>
-        <i>starting time=</i>{{i.startingTime}}
-        <hr>
-        <i>finishing time=</i>{{i.finishingTime}}
-        <hr>
-		<form action="/del/{{i.id}}" method="POST" style=" padding-right: 4%; padding-bottom: 3%;">
-		{%csrf_token%}
-		<button value="remove" type="submit" class="btn btn-primary" style="float: right;"><span class="glyphicon glyphicon-trash"></span>  remove</button>
+	{% if messages %}
+	{% for message in messages %}
+	<div class="alert alert-info">
+	  <strong>{{message}}</strong>
+	</div>
+	{% endfor %}
+	{% endif %}
+	<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+	  <div class="row">
+		<div class="col-md-8">
+		  <center class="row">
+			<h1><i>Task Manager</i></h1>
+			<hr />
+		  </center>
+  
+		  <!-- Search Bar -->
+		  <div class="search-bar">
+			<form class="form-inline">
+			  <div class="form-group">
+				<input type="text" class="form-control" placeholder="Search tasks">
+			  </div>
+			  <button type="submit" class="btn btn-primary">Search</button>
+			</form>
+		  </div>
+  
+		  <div class="text-center">
+			<a href="form" class="btn btn-success btn-lg">Add New Task</a>
+		  </div>
+		  <br>
+  
+		  {% for i in list %}
+		  <div class="card">
+			<b style="color: red;">{{temp}}</b>
+			<b>{{i.title}}</b>
+			<hr />
+			<p>{{i.date}}</p>
+			<hr />
+			<p><b>{{i.details|safe}}</b></p>
+			<hr />
+			<i>Starting time:</i> {{i.startingTime}}
+			<hr>
+			<i>Finishing time:</i> {{i.finishingTime}}
+			<hr>
+			<form action="/del/{{i.id}}" method="POST" style="padding-right: 4%; padding-bottom: 3%;">
+			  {% csrf_token %}
+			  <button value="remove" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-trash"></span> Remove</button>
+			</form  >
+			
+			
+			<form action='com' method='post'>
+				{% csrf_token %}
+				<button id="completeButton">Click me!</button>
 		</form>
+		  </div>
+		  {% endfor %}
+		</div>
+	  </div>
 	</div>
-    {% endfor %}
-	
-	</div>
-	<div class="col-md-1"> </div>
-	<div class="col-md-3" >
-	<div class="submit_form" style="height: 15cm;">
-	<form method="POST">
-        {% csrf_token %}
-        {{forms}}
-		<center>
-		<input type="submit" class="btn btn-default" value="submit" />
-	</center>
-	</form> 
-    
-	</div>
-</div>
-</div>
-</body>
-
-</html>
+  </body>
+  
+  </html>

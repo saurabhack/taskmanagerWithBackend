@@ -25,3 +25,23 @@ def remove(request,item_id):
     item.delete()
     messages.info(request,'item removed !!!')
     return redirect('/')
+def form(request):
+    if request.method=='POST':
+        forms=TodoForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('/')
+    else:
+        forms= TodoForm()
+        return render(request,'form.html',{'forms':forms})
+def complete(request):
+    '''
+    item=todo.objects.get(id=item_id)
+    if item:
+        temp='this task is completed'
+        return render(request,'index.html',{'temp':temp})
+    else:
+        return redirect('/')'''
+    temp= HttpResponse('this task is completed')
+    return render(request,'index.html',{'temp':temp})
+    

@@ -1,22 +1,93 @@
-<form method="post" action="/">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Form styles */
+form {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">create your notes</h1>
+<form method="post" action="" >
     {% csrf_token %}
-    <h1>task details</h1>
+    {{forms.media}}
+    {{forms}}
+    <!-- 
+    <label for="subject"> enter your subject </label>
     <br>
-    <input type="text"  name="task">
+    <input type="text" name="subject">
     <br>
-    <h1>enter your date</h1>
-    <input type="text" name="date">
+    <label for="chapter">enter your chapter</label>
     <br>
-    <h1>enter time to finish</h1>
+    <input type="text" name="chapter">
     <br>
-    <h1>starting time</h1>
+    <label for="image"> upload your image on your requirement </label>
     <br>
-    <input type="time" name="starting">
+    <input type="file" name="image" accept="image/+">
+
     <br>
-    <h1>finishing time</h1>
+    <label for="notes">enter your notes</label>
     <br>
-    <input type="time" name="finishing">
+    <textarea name="notes" id="" cols="30" rows="30"></textarea> -->
     <br>
-    <br>
-    <button>add+</button>
+    
+    <button>add Notes</button>
+
 </form>
+</body>
+</html>
+
