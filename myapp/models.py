@@ -10,5 +10,10 @@ class todo(models.Model):
     finishingTime=models.TimeField(default=timezone.now)
     def __str__(self):
         return self.title
+class hist(models.Model):
+    name=models.CharField(max_length=100)
+    finish=models.TimeField(default=timezone.now)
+    action=models.CharField(max_length=100)
+
 
 
